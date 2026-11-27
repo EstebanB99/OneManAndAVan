@@ -89,7 +89,7 @@
       month: "long",
       day: "numeric"
     });
-    bookingSelection.textContent = "Your selection won't carry over to Google's booking page.";
+    bookingSelection.textContent = "Google will ask you to select your quote appointment time again.";
     bookingTimes.replaceChildren();
 
     slots.forEach((time) => {
@@ -99,9 +99,9 @@
       timeButton.rel = "noopener noreferrer";
       timeButton.className = "booking-time";
       timeButton.textContent = formatTime(time);
-      timeButton.setAttribute("aria-label", `${formatTime(time)} available time, opens Google booking in a new tab`);
+      timeButton.setAttribute("aria-label", `${formatTime(time)} quote appointment time, opens Google scheduling in a new tab`);
       timeButton.addEventListener("click", () => {
-        bookingSelection.textContent = `Opening Google booking for ${formatTime(time)} on ${selectedDateHeading.textContent}. Choose your date and time again there.`;
+        bookingSelection.textContent = `Opening Google to schedule your free quote at ${formatTime(time)} on ${selectedDateHeading.textContent}. Select the date and time again there.`;
       });
       bookingTimes.append(timeButton);
     });
