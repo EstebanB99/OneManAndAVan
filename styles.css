@@ -40,6 +40,8 @@ a { color: inherit; text-decoration: none; }
   gap: 30px;
 }
 
+.home-header { position: relative; min-height: 104px; }
+.header-location { position: absolute; bottom: 5px; left: 0; margin: 0; color: #7b8985; font-size: 9px; line-height: 1; }
 .brand { display: flex; width: 90px; height: 68px; align-items: center; flex: 0 0 auto; }
 .brand img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .main-nav { display: flex; align-items: center; gap: clamp(24px, 4vw, 52px); margin-left: auto; }
@@ -147,7 +149,7 @@ h1 span, h2 span { color: var(--green); }
 .closing-section h2 { font-size: clamp(43px, 5vw, 60px); }
 .closing-section > p:not(.eyebrow) { margin: 16px 0 24px; color: var(--muted); font-size: 13px; }
 .closing-actions { display: flex; align-items: center; justify-content: center; gap: 18px; }
-.preview-note { color: #7a898c; font-size: 10px; }
+.preview-note { color: var(--green); }
 
 .site-footer { background: #e9eee8; }
 .footer-main { min-height: 150px; display: flex; align-items: center; justify-content: space-between; gap: 35px; }
@@ -190,13 +192,16 @@ h1 span, h2 span { color: var(--green); }
 .rates-note strong { color: var(--green); white-space: nowrap; }
 .details-section { padding: 100px 0; background: #edf2eb; }
 .details-section .section-heading { margin-bottom: 34px; }
-.details-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.detail-card { min-height: 230px; padding: 24px 24px 22px; border: 1px solid #dce5dc; border-radius: 16px; background: #f9faf5; }
+.details-grid { display: grid; grid-template-columns: repeat(3, 1fr); align-items: start; gap: 14px; }
+.detail-card { min-height: 150px; padding: 24px 24px 22px; overflow: hidden; border: 1px solid #dce5dc; border-radius: 16px; background: #f9faf5; transition: min-height .35s ease, box-shadow .3s ease, transform .3s ease; }
 .detail-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 22px; border-radius: 14px; background: #e6f0e8; color: var(--green); font-size: 20px; }
 .detail-card:nth-child(3n + 2) .detail-icon { background: #f6edce; color: #8d6a11; }
 .detail-card:nth-child(3n + 3) .detail-icon { background: #e6f0f3; }
 .detail-card h3 { margin-bottom: 9px; font-family: var(--display); font-size: 16px; font-weight: 800; letter-spacing: -.035em; }
-.detail-card p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.75; }
+.detail-card p { max-height: 0; margin: 0; overflow: hidden; color: var(--muted); font-size: 11px; line-height: 1.75; opacity: 0; transform: translateY(-4px); transition: max-height .35s ease, margin .35s ease, opacity .25s ease, transform .25s ease; }
+.detail-card:hover, .detail-card:focus-within { min-height: 230px; transform: translateY(-3px); box-shadow: 0 12px 28px #2743520b; }
+.detail-card:hover p, .detail-card:focus-within p { max-height: 15rem; margin-top: 12px; opacity: 1; transform: translateY(0); }
+.detail-card:focus-visible { outline: 3px solid #d5ab45; outline-offset: 3px; }
 .included-section { padding-top: 100px; padding-bottom: 100px; }
 .included-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 85px; align-items: start; }
 .included-copy .eyebrow { margin-bottom: 14px; }
@@ -220,7 +225,8 @@ h1 span, h2 span { color: var(--green); }
 .service-closing { padding-top: 85px; padding-bottom: 95px; }
 .service-closing .eyebrow { margin-bottom: 15px; }
 .service-closing h2 { font-size: clamp(40px, 5vw, 56px); }
-.service-closing > p a { color: var(--green); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.service-home-link { margin-top: 22px; }
+.service-home-link .text-link { margin-top: 0; }
 
 .booking-hero { display: flex; align-items: end; justify-content: space-between; gap: 32px; padding-top: 74px; padding-bottom: 48px; }
 .booking-hero > div:first-child { max-width: 700px; }
@@ -276,6 +282,15 @@ h1 span, h2 span { color: var(--green); }
 .availability-dialog::backdrop { background: #20364273; }
 .availability-dialog[open] { animation: booking-drawer-in .24s ease-out; }
 @keyframes booking-drawer-in { from { transform: translateX(24px); opacity: .8; } to { transform: translateX(0); opacity: 1; } }
+
+@media (hover: none) {
+  .detail-card { min-height: 0; }
+  .detail-card p { max-height: none; margin-top: 0; overflow: visible; opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail-card, .detail-card p { transition: none; }
+}
 .availability-dialog-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
 .availability-dialog-header .eyebrow { margin: 0 0 10px; }
 .availability-dialog-header h2 { margin: 0; font-size: 28px; letter-spacing: -.05em; }
@@ -315,6 +330,8 @@ h1 span, h2 span { color: var(--green); }
 @media (max-width: 620px) {
   .page-wrap, .site-header { width: calc(100% - 36px); }
   .site-header { min-height: 74px; gap: 9px; }
+  .home-header { min-height: 84px; }
+  .header-location { bottom: 4px; font-size: 8px; }
   .brand { width: 58px; height: 48px; }
   .main-nav { gap: 12px; }
   .main-nav a { font-size: 10px; }
