@@ -55,10 +55,10 @@ function readScheduleConfig(env) {
     timeZone: env.BOOKING_TIME_ZONE || "America/Indiana/Indianapolis",
     openHour: integerSetting(env, "BOOKING_OPEN_HOUR", 6, 0, 23),
     closeHour: integerSetting(env, "BOOKING_CLOSE_HOUR", 15, 1, 24),
-    slotMinutes: integerSetting(env, "BOOKING_SLOT_MINUTES", 60, 1, 720),
+    slotMinutes: integerSetting(env, "BOOKING_SLOT_MINUTES", 30, 1, 720),
     maximumAdvanceDays: integerSetting(env, "BOOKING_MAX_ADVANCE_DAYS", 60, 1, 3650),
     minimumLeadHours: integerSetting(env, "BOOKING_MIN_LEAD_HOURS", 4, 0, 720),
-    bufferMinutes: integerSetting(env, "BOOKING_BUFFER_MINUTES", 60, 0, 720)
+    bufferMinutes: integerSetting(env, "BOOKING_BUFFER_MINUTES", 0, 0, 720)
   };
 
   if (config.closeHour <= config.openHour
