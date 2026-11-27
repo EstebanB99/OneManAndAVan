@@ -46,8 +46,8 @@ a { color: inherit; text-decoration: none; }
 .brand { display: flex; width: 90px; height: 68px; align-items: center; flex: 0 0 auto; }
 .brand img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .footer-contact a:hover { color: var(--brand); }
-.header-cta { padding: 13px 20px; border: 1px solid #d5ddd9; border-radius: 999px; font-size: 13px; font-weight: 700; white-space: nowrap; transition: background .2s ease, color .2s ease; }
-.header-cta span { padding-left: 10px; font-size: 16px; }
+.header-cta { display: inline-flex; align-items: center; justify-content: center; padding: 13px 20px; border: 1px solid #478ac9; border-radius: 999px; background: var(--white); color: var(--brand); box-shadow: 0 4px 12px #2036421a; font-size: 13px; font-weight: 700; white-space: nowrap; transition: background .2s ease, color .2s ease; }
+.header-cta .phone-button-icon { margin-left: 8px; }
 .header-cta:hover { color: white; background: var(--brand-hover); border-color: var(--brand-hover); }
 
 .hero { min-height: 600px; display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 40px; padding-top: 40px; padding-bottom: 70px; }
@@ -77,6 +77,8 @@ h1 span, h2 span { color: var(--brand); }
 .button-secondary { border: 1px solid #d5ddd9; background: transparent; color: var(--brand); }
 .button-secondary:hover { background: #e9f2fa; }
 .button span { font-size: 17px; }
+.phone-button-icon { width: 16px; height: 16px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.text-link .phone-button-icon { width: 14px; height: 14px; }
 .phone-link { display: flex; align-items: center; gap: 10px; }
 .phone-icon { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #d7dfd9; border-radius: 50%; color: var(--brand); font-size: 15px; }
 .phone-link small, .phone-link strong { display: block; }
@@ -342,8 +344,8 @@ h1 span, h2 span { color: var(--brand); }
   .home-header { min-height: 84px; }
   .header-location { bottom: 4px; font-size: 8px; }
   .brand { width: 58px; height: 48px; }
-  .header-cta { padding: 10px 12px; font-size: 10px; }
-  .header-cta span { padding-left: 5px; }
+  .header-cta { min-height: 44px; padding: 10px 13px; font-size: 11px; }
+  .header-cta .phone-button-icon { width: 15px; height: 15px; margin-left: 6px; }
   .hero { min-height: 0; display: grid; grid-template-columns: 1fr; align-items: stretch; gap: 0; padding-top: 14px; padding-bottom: 40px; }
   .hero-copy { padding: 0; }
   .eyebrow { font-size: 9px; }
@@ -361,12 +363,9 @@ h1 span, h2 span { color: var(--brand); }
   .hero-call-button { margin: 12px 0 9px; }
   .hero-section-links { gap: 6px; }
   .hero-section-links .button { min-height: 40px; gap: 5px; padding-inline: 5px; font-size: 9px; }
-  .hero-art { min-height: 185px; margin: 0; }
-  .hero-logo { width: 64%; max-width: 280px; transform: none; }
-  .sunburst { width: 78px; height: 78px; top: 1%; right: 7%; }
-  .floating-note { right: 0; bottom: -5%; padding: 10px 13px; font-size: 9px; }
-  .floating-note strong { font-size: 11px; }
-  .art-caption { bottom: 2%; font-size: 10px; }
+  .hero-art { min-height: 235px; margin: 0; }
+  .hero-logo { width: min(74%, 250px); max-height: 220px; object-fit: contain; transform: none; }
+  .sunburst, .floating-note, .art-caption { display: none; }
   .trust-inner { min-height: 78px; gap: 12px; }
   .trust-inner p { font-size: 10px; }
   .trust-inner p:first-child { max-width: 155px; font-size: 14px; }
