@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f8f6ef">
-    <meta name="description" content="Preview the One Man and a Van booking calendar and explore sample moving appointment times.">
+    <meta name="description" content="Check current moving appointment availability with One Man and a Van.">
     <title>Booking | One Man and a Van</title>
     <link rel="preconnect" href="https://assets.nicepagecdn.com">
     <link rel="stylesheet" href="styles.css">
@@ -30,9 +30,9 @@
         <div>
           <p class="eyebrow"><span class="eyebrow-dot"></span> A simpler way to plan your move</p>
           <h1>Find a day that <span>works for you.</span></h1>
-          <p>Choose a day and sample time to open Google booking. Your sample selection won't carry over; you'll choose a date and time again there.</p>
+          <p>See times based on your schedule, then continue to Google to book. Google will verify availability and ask you to select your date and time again.</p>
         </div>
-        <div class="booking-preview-badge"><span aria-hidden="true">✳</span> Calendar preview · sample availability</div>
+        <div class="booking-preview-badge" id="booking-source-label" role="status"><span aria-hidden="true">✳</span> Connecting to Google Calendar…</div>
       </section>
 
       <section class="booking-section page-wrap" aria-labelledby="calendar-title">
@@ -50,7 +50,7 @@
           </div>
 
           <div class="booking-legend" aria-label="Calendar key">
-            <span><i class="legend-dot legend-available" aria-hidden="true"></i> Sample times available</span>
+            <span><i class="legend-dot legend-available" aria-hidden="true"></i> Times available</span>
             <span><i class="legend-dot legend-unavailable" aria-hidden="true"></i> No times</span>
           </div>
 
@@ -64,21 +64,21 @@
             <div class="calendar-weekday"><abbr title="Saturday">S</abbr></div>
             <div class="calendar-days" id="calendar-days" aria-live="polite"></div>
           </div>
-          <p class="calendar-status" id="calendar-status" role="status">Loading sample availability…</p>
+          <p class="calendar-status" id="calendar-status" role="status">Loading live availability…</p>
         </div>
 
         <aside class="booking-help-card">
           <span class="booking-help-icon" aria-hidden="true">♡</span>
-          <p class="eyebrow">No pressure, just a preview</p>
+          <p class="eyebrow">Here when you need us</p>
           <h2>Need a hand figuring it out?</h2>
-          <p>Our sample calendar is here to show how scheduling will work. For a real estimate or to talk through your move, give us a call.</p>
+          <p>We check your calendar for existing commitments. Google verifies the time when you continue to book.</p>
           <a class="text-link" href="tel:+18122132727">Call 812-213-2727 <span aria-hidden="true">↗</span></a>
         </aside>
       </section>
 
-      <section class="booking-disclaimer page-wrap" aria-label="Booking preview notice">
+      <section class="booking-disclaimer page-wrap" aria-label="Booking information">
         <span aria-hidden="true">✳</span>
-        <p><strong>This is a preview.</strong> The dates and times here are examples and don't reserve an appointment. Google will show its booking availability when you continue; choose your date and time again there.</p>
+        <p><strong>How availability works.</strong> Times reflect your daily 6:00 AM–3:00 PM Eastern schedule and busy calendar events. Google is the final check; select the date and time again on its booking page.</p>
       </section>
     </main>
 
@@ -90,10 +90,10 @@
         </div>
         <button class="dialog-close" id="close-availability" type="button" aria-label="Close available times">×</button>
       </div>
-      <p class="availability-intro">Choose a sample time to open Google booking. You'll select your date and time again there.</p>
+      <p class="availability-intro">Choose a time to open Google booking. You'll select your date and time again there.</p>
       <div class="booking-time-list" id="booking-times"></div>
-      <p class="booking-selection" id="booking-selection" role="status" aria-live="polite">These sample times won't carry over to Google's booking page.</p>
-      <p class="booking-notice">These are demo times. An appointment is only reserved after you complete Google's booking form.</p>
+      <p class="booking-selection" id="booking-selection" role="status" aria-live="polite">Your selection won't carry over to Google's booking page.</p>
+      <p class="booking-notice">An appointment is only reserved after you complete Google's booking form.</p>
     </dialog>
 
     <footer class="site-footer">

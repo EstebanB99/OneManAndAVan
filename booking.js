@@ -6,6 +6,7 @@
   const monthLabel = document.getElementById("calendar-month");
   const calendarDays = document.getElementById("calendar-days");
   const calendarStatus = document.getElementById("calendar-status");
+  const bookingSourceLabel = document.getElementById("booking-source-label");
   const dialog = document.getElementById("availability-dialog");
   const closeDialogButton = document.getElementById("close-availability");
   const selectedDateHeading = document.getElementById("selected-date");
@@ -69,7 +70,7 @@
         month: "long",
         day: "numeric",
         year: "numeric"
-      })}${slots.length ? `, ${slots.length} sample times available` : ", no availability"}`);
+      })}${slots.length ? `, ${slots.length} times available` : ", no availability"}`);
 
       if (isPast) dateButton.classList.add("is-past");
       else if (slots.length) dateButton.classList.add("has-availability");
@@ -88,7 +89,7 @@
       month: "long",
       day: "numeric"
     });
-    bookingSelection.textContent = "These sample times won't carry over to Google's booking page.";
+    bookingSelection.textContent = "Your selection won't carry over to Google's booking page.";
     bookingTimes.replaceChildren();
 
     slots.forEach((time) => {
@@ -98,7 +99,7 @@
       timeButton.rel = "noopener noreferrer";
       timeButton.className = "booking-time";
       timeButton.textContent = formatTime(time);
-      timeButton.setAttribute("aria-label", `${formatTime(time)} sample time, opens Google booking in a new tab`);
+      timeButton.setAttribute("aria-label", `${formatTime(time)} available time, opens Google booking in a new tab`);
       timeButton.addEventListener("click", () => {
         bookingSelection.textContent = `Opening Google booking for ${formatTime(time)} on ${selectedDateHeading.textContent}. Choose your date and time again there.`;
       });
@@ -112,7 +113,8 @@
   async function loadVisibleMonth() {
     previousMonthButton.disabled = true;
     nextMonthButton.disabled = true;
-    calendarStatus.textContent = "Loading sample availability…";
+    bookingSourceLabel.lastChild.textContent = " Connecting to Google Calendar…";
+    calendarStatus.textContent = "Loading live availability…";
 
     try {
       availability = await provider.getMonthAvailability(
@@ -120,12 +122,14 @@
         visibleMonth.getMonth()
       );
       renderCalendar();
-      calendarStatus.textContent = "Choose any highlighted day to see its sample times.";
+      bookingSourceLabel.lastChild.textContent = " Live Google Calendar availability";
+      calendarStatus.textContent = "Choose a highlighted day to see available times.";
     } catch (error) {
       console.error("Could not load booking availability.", error);
       availability = {};
       renderCalendar();
-      calendarStatus.textContent = "Availability could not be loaded. Please try again.";
+      bookingSourceLabel.lastChild.textContent = " Google Calendar unavailable";
+      calendarStatus.textContent = "Live availability could not be loaded. Please try again later.";
     } finally {
       const isCurrentMonth = visibleMonth.getFullYear() === today.getFullYear()
         && visibleMonth.getMonth() === today.getMonth();
