@@ -28,9 +28,10 @@ The endpoint defaults to:
 | `BOOKING_OPEN_HOUR` | `6` | Daily opening hour (24-hour clock) |
 | `BOOKING_CLOSE_HOUR` | `15` | Daily closing time; no appointment starts at or after this hour |
 | `BOOKING_SLOT_MINUTES` | `60` | Appointment duration and slot interval |
+| `BOOKING_MAX_ADVANCE_DAYS` | `60` | How far into the future appointments may be shown |
 | `BOOKING_MIN_LEAD_HOURS` | `4` | Minimum time before an appointment can start |
-| `BOOKING_BUFFER_MINUTES` | `0` | Buffer applied around busy calendar events |
+| `BOOKING_BUFFER_MINUTES` | `60` | Buffer applied around busy calendar events |
 
-The daily hours and 60-minute duration match the supplied schedule. The four-hour minimum lead time is an assumption and should be changed to match the Google appointment schedule. Google Calendar API provides busy periods, not appointment-schedule rules such as date-specific exceptions, booking limits, or co-host availability. Add any calendars that should block a slot to `GOOGLE_CALENDAR_IDS`; use calendar events to represent time off or other exceptions.
+The daily hours, 60-day booking window, 60-minute duration, four-hour minimum lead time, and one-hour buffer match the Google appointment schedule. Google Calendar API provides busy periods, not appointment-schedule rules such as date-specific exceptions, booking limits, or co-host availability. Add any calendars that should block a slot to `GOOGLE_CALENDAR_IDS`; use calendar events to represent time off or other exceptions.
 
 After adding or changing settings, redeploy the Pages project. The live endpoint is `/api/availability?month=YYYY-MM`.

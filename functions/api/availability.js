@@ -56,8 +56,9 @@ function readScheduleConfig(env) {
     openHour: integerSetting(env, "BOOKING_OPEN_HOUR", 6, 0, 23),
     closeHour: integerSetting(env, "BOOKING_CLOSE_HOUR", 15, 1, 24),
     slotMinutes: integerSetting(env, "BOOKING_SLOT_MINUTES", 60, 1, 720),
+    maximumAdvanceDays: integerSetting(env, "BOOKING_MAX_ADVANCE_DAYS", 60, 1, 3650),
     minimumLeadHours: integerSetting(env, "BOOKING_MIN_LEAD_HOURS", 4, 0, 720),
-    bufferMinutes: integerSetting(env, "BOOKING_BUFFER_MINUTES", 0, 0, 720)
+    bufferMinutes: integerSetting(env, "BOOKING_BUFFER_MINUTES", 60, 0, 720)
   };
 
   if (config.closeHour <= config.openHour
@@ -218,6 +219,7 @@ function buildAvailability(monthStart, busyPeriods, config) {
   const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
   const now = Date.now();
   const earliestStart = now + config.minimumLeadHours * 60 * 60 * 1000;
+  const latestStart = now + config.maximumAdvanceDays * 24 * 60 * 60 * 1000;
   const bufferMs = config.bufferMinutes * 60 * 1000;
 
   for (let day = 1; day <= daysInMonth; day += 1) {
@@ -230,7 +232,7 @@ function buildAvailability(monthStart, busyPeriods, config) {
       minute += config.slotMinutes) {
       const start = localTimeToUtc(date, Math.floor(minute / 60), minute % 60, config.timeZone);
       const end = new Date(start.getTime() + config.slotMinutes * 60 * 1000);
-      if (start.getTime() < earliestStart) continue;
+      if (start.getTime() < earliestStart || start.getTime() > latestStart) continue;
 
       const isBusy = busyPeriods.some((period) =>
         start.getTime() < period.end + bufferMs
